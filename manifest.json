@@ -1,0 +1,21 @@
+{
+  "name": "IS FOR US — Справочник для студентов",
+  "short_name": "IS FOR US",
+  "description": "Офлайн-справочник по ИС, программированию, SQL, сетям, Linux, QA и кибербезопасности.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0b1413",
+  "theme_color": "#0f766e",
+  "icons": [
+    {
+      "src": "logo.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}

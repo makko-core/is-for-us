@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IS FOR US — офлайн-справочник для студентов</title>
+  <link rel="icon" type="image/jpeg" href="logo.jpg" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0f766e" />
+</head>
+<body>
+
+  <!-- ==================== ЭКРАН 1: ПРИВЕТСТВИЕ ==================== -->
+  <section id="screen-welcome" class="screen active">
+    <header class="topbar">
+      <span class="brand" onclick="goToWelcome()" style="display:inline-flex; align-items:center; gap:8px;">
+        <img src="logo.jpg" alt="IS FOR US" style="width:26px; height:26px; border-radius:6px; object-fit:cover;" />
+        <span>IS FOR US</span>
+      </span>
+      <div class="topbar-right">
+        <button class="btn btn-sm lang-toggle-btn" onclick="toggleLang()">EN</button>
+        <button class="btn btn-sm theme-toggle-btn" onclick="toggleTheme()">Тёмная тема</button>
+      </div>
+    </header>
+
+    <div class="welcome-wrap">
+      <div style="margin-bottom: 14px;">
+        <img src="logo.jpg" alt="IS FOR US" style="width:110px; height:110px; border-radius:22px; object-fit:cover; box-shadow: var(--shadow);" />
+      </div>
+      <span class="welcome-pill" data-i18n="pill">Офлайн-справочник для студентов</span>
+      <h1>IS FOR US</h1>
+      <p data-i18n="welcomeDesc">
+        Учебная база знаний без сложной теории: понятные конспекты, наглядные разборы и практические тесты для уверенной сдачи зачётов и проектов.
+      </p>
+      <div class="welcome-actions">
+        <button class="btn btn-primary" onclick="goToSubjects()" data-i18n="startBtn">Начать обучение →</button>
+      </div>
+
+      <div class="welcome-stats">
+        <div class="stat-chip" data-i18n="stat1"><strong>Понятная теория</strong> без воды</div>
+        <div class="stat-chip" data-i18n="stat2"><strong>Наглядные</strong> разборы тем</div>
+        <div class="stat-chip" data-i18n="stat3"><strong>Трекер</strong> личного прогресса</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ЭКРАН «О НАС» ==================== -->
+  <section id="screen-about" class="screen">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="btn btn-sm" onclick="goToWelcome()" data-i18n="backHome">← На главную</button>
+        <span class="brand" onclick="goToWelcome()">IS FOR US</span>
+      </div>
+      <div class="topbar-right">
+        <button class="btn btn-sm lang-toggle-btn" onclick="toggleLang()">EN</button>
+        <button class="btn btn-sm theme-toggle-btn" onclick="toggleTheme()">Тёмная тема</button>
+      </div>
+    </header>
+    <main class="about-wrap" id="aboutContent"></main>
+  </section>
+
+  <!-- ==================== ЭКРАН 2: ПРЕДМЕТНЫЕ ОБЛАСТИ ==================== -->
+  <section id="screen-subjects" class="screen">
+    <header class="topbar">
+      <span class="brand" onclick="goToWelcome()">IS FOR US</span>
+      <div class="topbar-right">
+        <button class="btn btn-sm lang-toggle-btn" onclick="toggleLang()">EN</button>
+        <button class="btn btn-sm theme-toggle-btn" onclick="toggleTheme()">Тёмная тема</button>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="select-header">
+        <div>
+          <h2 data-i18n="subjectsTitle">Предметные области</h2>
+          <p data-i18n="subjectsSub">Выберите дисциплину для изучения. Новые разделы легко добавлять в папку data/.</p>
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="btn btn-sm" onclick="openSpecialSection('comparisons')" data-i18n="cmpBtn">⚖️ Сравнения</button>
+          <button class="btn btn-sm" onclick="openSpecialSection('faq-base')" data-i18n="faqBtn">❓ FAQ</button>
+        </div>
+      </div>
+      <div class="cards-grid" id="subjectsGrid"></div>
+    </div>
+  </section>
+
+  <!-- ==================== ЭКРАН 3: СПИСОК ТЕМ ==================== -->
+  <section id="screen-select" class="screen">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="btn btn-sm" onclick="goToSubjects()" data-i18n="backSubjects">← Предметы</button>
+        <span class="brand" onclick="goToWelcome()">IS FOR US</span>
+      </div>
+      <div class="topbar-right">
+        <button class="btn btn-sm lang-toggle-btn" onclick="toggleLang()">EN</button>
+        <button class="btn btn-sm theme-toggle-btn" onclick="toggleTheme()">Тёмная тема</button>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="select-header">
+        <div>
+          <h2 id="subjectHeaderTitle">Раздел</h2>
+          <p id="subjectHeaderSub">Описание раздела</p>
+        </div>
+        <input type="text" id="searchInput" class="search-input" placeholder="Фильтр по названию или элементу..." />
+      </div>
+
+      <div class="progress-box">
+        <div class="progress-top">
+          <span id="progressLabel">Прогресс: 0 из 0</span>
+          <span id="progressPercent" style="color:var(--accent);">0%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+
+      <div class="cards-grid" id="cardsGrid"></div>
+    </div>
+  </section>
+
+  <!-- ==================== ЭКРАН 4: ИЗУЧЕНИЕ ТЕМЫ ==================== -->
+  <section id="screen-study" class="screen">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="btn btn-sm" onclick="goToSelect()" data-i18n="backTopics">← К списку тем</button>
+        <span class="brand" id="studyTopTitle">IS FOR US</span>
+      </div>
+      <div class="topbar-right">
+        <button class="btn btn-sm lang-toggle-btn" onclick="toggleLang()">EN</button>
+        <button class="btn btn-sm theme-toggle-btn" onclick="toggleTheme()">Тёмная тема</button>
+      </div>
+    </header>
+    <main class="study-wrap" id="studyContent"></main>
+  </section>
+
+  <!-- ==================== ЭКРАН 5: МИНИ-ТЕСТ ==================== -->
+  <section id="screen-quiz" class="screen">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="btn btn-sm" onclick="returnToStudy()" data-i18n="backTheory">← Вернуться к теории</button>
+        <span class="brand" id="quizTopTitle">Мини-тест</span>
+      </div>
+      <div class="topbar-right">
+        <button class="btn btn-sm lang-toggle-btn" onclick="toggleLang()">EN</button>
+        <button class="btn btn-sm theme-toggle-btn" onclick="toggleTheme()">Тёмная тема</button>
+      </div>
+    </header>
+    <main class="quiz-wrap" id="quizContent"></main>
+  </section>
+
+  <!-- ==================== ПОДВАЛ САЙТА (FOOTER) ==================== -->
+  <footer class="site-footer" id="siteFooter"></footer>
+
+  <!-- ==================== ГЛОБАЛЬНЫЙ ПОИСК (МОДАЛЬНОЕ ОКНО) ==================== -->
+  <div class="search-modal" id="globalSearchModal" onclick="if(event.target === this) closeGlobalSearch()">
+    <div class="search-modal-box">
+      <div class="search-modal-head">
+        <span style="font-size:1.1rem;">🔍</span>
+        <input type="text" id="globalSearchInput" placeholder="Поиск по всем предметам, сравнениям и FAQ..." />
+        <button class="btn btn-sm" onclick="closeGlobalSearch()">Esc</button>
+      </div>
+      <div class="search-results" id="globalSearchResults"></div>
+    </div>
+  </div>
+
+  <!-- ==================== ПОДКЛЮЧЕНИЕ РАЗДЕЛОВ (DATA) ==================== -->
+  <script src="data/diagrams.js"></script>
+  <script src="data/algorithms.js"></script>
+  <script src="data/sql.js"></script>
+  <script src="data/networks.js"></script>
+  <script src="data/git.js"></script>
+  <script src="data/os-linux.js"></script>
+  <script src="data/qa.js"></script>
+  <script src="data/comparisons.js"></script>
+  <script src="data/faq.js"></script>
+  <script src="data/cybersecurity.js"></script>
+  <script src="data/pc-architecture.js"></script>
+  <script src="data/is-implementation.js"></script>
+  <script src="data/db-management.js"></script>
+  <script src="data/content-management.js"></script>
+
+  <!-- Основная логика приложения -->
+  <script src="app.js"></script>
+</body>
+</html>
