@@ -1231,3 +1231,383 @@ body {
 #cursorCircle {
   display: none !important;
 }
+/* =========================================================================
+   ПОЛНАЯ МОБИЛЬНАЯ АДАПТАЦИЯ И ЧЁТКИЕ КАРТОЧКИ ИНТЕРАКТИВОВ
+   ========================================================================= */
+
+/* Базовая чёткость для интерактивов (и на ПК, и на телефоне) */
+.order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 14px 0 16px;
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.order-controls {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.order-btn {
+  min-width: 36px;
+  min-height: 36px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.match-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 14px 0 16px;
+}
+
+.match-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.match-item {
+  width: 100%;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1.5px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  text-align: left;
+  font-size: 0.94rem;
+  line-height: 1.38;
+  cursor: pointer;
+  transition: border-color 0.18s ease, background 0.18s ease, transform 0.12s ease;
+}
+
+.match-item.selected {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, var(--bg));
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 25%, transparent);
+}
+
+.match-item.paired {
+  border-color: var(--accent);
+}
+
+.match-item.correct,
+.order-item.correct {
+  border-color: #16a34a !important;
+  background: rgba(22, 163, 74, 0.12) !important;
+}
+
+.match-item.wrong,
+.order-item.wrong {
+  border-color: #dc2626 !important;
+  background: rgba(220, 38, 38, 0.12) !important;
+}
+
+.match-num {
+  flex-shrink: 0;
+  min-width: 26px;
+  height: 26px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Защита от горизонтального скролла всего сайта */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* ===== СМАРТФОНЫ И ПЛАНШЕТЫ (до 768px) ===== */
+@media (max-width: 768px) {
+  .container,
+  .screen-inner,
+  .study-wrap,
+  .quiz-wrap {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  /* Шапка (topbar): аккуратный перенос без наезда */
+  .topbar {
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px 14px !important;
+  }
+
+  .topbar-right {
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .topbar .btn-sm {
+    padding: 7px 10px;
+    font-size: 0.82rem;
+  }
+
+  /* Заголовки и стартовый экран */
+  h1 {
+    font-size: 1.55rem !important;
+    line-height: 1.25 !important;
+  }
+
+  h2 {
+    font-size: 1.22rem !important;
+  }
+
+  .lead {
+    font-size: 0.96rem !important;
+  }
+
+  /* Сетка предметов и тем — строго 1 колонка */
+  .cards-grid,
+  .subjects-grid,
+  .about-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .topic-card {
+    padding: 16px !important;
+  }
+
+  /* Поля ввода: 16px, чтобы iOS не делал автозум */
+  input[type="text"],
+  input[type="search"],
+  textarea {
+    font-size: 16px !important;
+  }
+
+  /* Таблицы теории превращаются в удобные вертикальные карточки */
+  .table-wrap {
+    border: none !important;
+    background: transparent !important;
+    overflow: visible !important;
+  }
+
+  .table-wrap table,
+  .table-wrap tbody,
+  .table-wrap tr,
+  .table-wrap td {
+    display: block;
+    width: 100%;
+  }
+
+  .table-wrap thead {
+    display: none;
+  }
+
+  .table-wrap tr {
+    margin-bottom: 10px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .table-wrap td {
+    padding: 0 !important;
+    border: none !important;
+  }
+
+  .table-wrap td.el-name {
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 5px;
+  }
+
+  /* Блоки кода и SVG-схемы */
+  .code-block,
+  .svg-box {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    font-size: 0.82rem;
+  }
+
+  .example-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .example-tabs {
+    display: flex;
+    overflow-x: auto;
+    gap: 6px;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .ex-tab {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* ИНТЕРАКТИВНЫЕ ПАРЫ НА ТЕЛЕФОНЕ: столбики друг под другом с подписями */
+  .match-grid {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+  }
+
+  .match-col:first-child::before {
+    content: "1. Выберите элемент:";
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+  }
+
+  .match-col:last-child::before {
+    content: "2. Выберите подходящую пару:";
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+    padding-top: 8px;
+    border-top: 1px dashed var(--border);
+  }
+
+  .match-item {
+    padding: 13px 14px;
+    font-size: 0.93rem;
+  }
+
+  /* Крупные кнопки для сортировки и тестов */
+  .order-item {
+    padding: 12px;
+    font-size: 0.92rem;
+  }
+
+  .order-btn {
+    min-width: 40px;
+    min-height: 40px;
+  }
+
+  .quiz-card {
+    padding: 16px !important;
+  }
+
+  .quiz-opt {
+    padding: 13px 14px !important;
+    font-size: 0.94rem !important;
+    text-align: left;
+  }
+
+  .quiz-header,
+  .quiz-trigger-box,
+  .quiz-result,
+  .study-nav-bottom {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+  }
+
+  .study-nav-bottom .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Подвал и кнопка «Наверх» */
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .footer-links {
+    flex-wrap: wrap;
+    gap: 10px 14px;
+  }
+
+  #scrollTopBtn {
+    right: 14px;
+    bottom: 16px;
+    width: 42px;
+    height: 42px;
+  }
+
+  /* Модальное окно переноса прогресса и поиска */
+  .sync-box {
+    padding: 18px 16px;
+  }
+}
+/* ===== ФИКС ФОНА И ТЕКСТА В ОКНЕ ПЕРЕНОСА ПРОГРЕССА ===== */
+.sync-box {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+.sync-steps,
+.sync-area {
+  background: #f8fafc !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+.sync-steps li {
+  color: #334155 !important;
+}
+
+.sync-steps strong {
+  color: #0f172a !important;
+}
+
+/* Тёмная тема */
+[data-theme="dark"] .sync-box {
+  background: #111c1b !important;
+  color: #f1f5f9 !important;
+  border-color: #243836 !important;
+}
+
+[data-theme="dark"] .sync-steps,
+[data-theme="dark"] .sync-area {
+  background: #0b1413 !important;
+  color: #f1f5f9 !important;
+  border-color: #243836 !important;
+}
+
+[data-theme="dark"] .sync-steps li {
+  color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .sync-steps strong {
+  color: #ffffff !important;
+}

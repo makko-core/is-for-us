@@ -1,4 +1,4 @@
-const CACHE_NAME = "isforus-cache-v1";
+const CACHE_NAME = "isforus-cache-v2";
 const ASSETS = [
   "./",
   "./index.html",
